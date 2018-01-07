@@ -1,23 +1,67 @@
 package miage.m2sid.dicegame.miage.m2sid.dicegame.metier;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+public class Result {
 
-@Entity
-public class Result implements Serializable {
+	private Dice dice1;
+	private Dice dice2;
+	private int score;
+	private int meilleurScore;
+	private String pseudoMeilleurScore;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+	public Result(Dice dice1, Dice dice2, int score) {
+		super();
+		this.dice1 = dice1;
+		this.dice2 = dice2;
+		this.score = score;
+	}
 
-    @Id
-    public String getId() {
-        return id;
-    }
+	public Result() {
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getPseudoMeilleurScore() {
+		return pseudoMeilleurScore;
+	}
+
+	public Dice getDice1() {
+		return dice1;
+	}
+
+	public void setDice1(Dice dice1) {
+		this.dice1 = dice1;
+	}
+
+	public Dice getDice2() {
+		return dice2;
+	}
+
+	public void setDice2(Dice dice2) {
+		this.dice2 = dice2;
+	}
+
+	public void setPseudoMeilleurScore(String pseudoMeilleurScore) {
+		this.pseudoMeilleurScore = pseudoMeilleurScore;
+	}
+
+	public int getMeilleurScore() {
+		return meilleurScore;
+	}
+
+	public void setMeilleurScore(int meilleurScore) {
+		this.meilleurScore = meilleurScore;
+	}
+
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return "Result [dice1=" + dice1.getState() + ", dice2=" + dice2.getState() + ", score=" + score + "]";
+	}
+
 }
