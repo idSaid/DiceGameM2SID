@@ -26,7 +26,7 @@ public class Factory {
         }
     }
 
-    Factory getInstance(){
+    static Factory getInstance(){
         if(factory == null)
             factory = new Factory();
 

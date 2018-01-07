@@ -1,6 +1,8 @@
 package miage.m2sid.dicegame.miage.m2sid.dicegame.persistance;
 
 
+import java.sql.Connection;
+
 public class XmlConnection implements DBConnection {
 
     static XmlConnection xmlConnection;
@@ -8,6 +10,10 @@ public class XmlConnection implements DBConnection {
 
     public void connection() {
         FILE_NAME = "dice_game.xml";
+    }
+
+    public Connection getConnection() {
+        return null;
     }
 
     public static DBConnection getInstance() {

@@ -2,13 +2,11 @@ package miage.m2sid.dicegame.miage.m2sid.dicegame.persistance;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
 
 public class MySqlConnection implements DBConnection {
 
     static MySqlConnection mySqlConnection;
     public Connection conn;
-    private Statement statement;
 
     public void connection() {
         String url= "jdbc:mysql://localhost:3306/";
@@ -23,6 +21,10 @@ public class MySqlConnection implements DBConnection {
         catch (Exception sqle) {
             sqle.printStackTrace();
         }
+    }
+
+    public Connection getConnection() {
+        return conn;
     }
 
     public static DBConnection getInstance() {
