@@ -32,7 +32,7 @@ public class Dice extends Observable{
         this.state = state;
     }
 
-    public void Roll(){
+    public void roll(){
         Random rand = new Random();
         // Random entre 1 et 6
         setState(rand.nextInt(6) + 1);
