@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/ihm/dice_game.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ihm/login_form.fxml"));
         primaryStage.setTitle("DiceGame");
 
-        Scene scene = new Scene(root, 647, 359);
+        Scene scene = new Scene(root, 291, 324);
 
         primaryStage.setScene(scene);
         primaryStage.show();

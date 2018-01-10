@@ -1,4 +1,4 @@
-package miage.m2sid.dicegame.miage.m2sid.dicegame.metier;
+package miage.m2sid.dicegame.metier;
 
 public class Result {
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane id="start-ui-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.miage.l3.jeu.controller.StartUIController">
+   <center>
+      <VBox id="start-ui-vbox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefWidth="220.0" styleClass="start-ui-label" text="Nombre de carte :" textFill="#ffea36">
+                     <font>
+                        <Font name="Georgia" size="20.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="nbCarteBox" prefWidth="150.0" promptText="..." styleClass="combo-box" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefWidth="220.0" styleClass="start-ui-label" text="Nombre de joueur :" textFill="#ffea36">
+                     <font>
+                        <Font name="Georgia Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="nbJoueurBox" prefWidth="150.0" promptText="..." styleClass="combo-box" />
+               </children>
+            </HBox>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="146.0" prefWidth="10.0" />
+            <Button fx:id="btnJouer" mnemonicParsing="false" onAction="#onJouerClicked" styleClass="start-ui-btn" text="Jouer">
+               <font>
+                  <Font name="Georgia Bold" size="22.0" />
+               </font>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </center>
+   <top>
+      <Separator opacity="0.0" orientation="VERTICAL" prefHeight="200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <bottom>
+      <Separator opacity="0.0" orientation="VERTICAL" prefHeight="103.0" prefWidth="6.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <Separator opacity="0.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Separator opacity="0.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

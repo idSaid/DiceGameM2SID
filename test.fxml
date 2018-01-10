@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="mainBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.miage.l3.jeu.controller.GameUIController">
+   <children>
+      <VBox id="score-box" prefHeight="900.0" prefWidth="1100.0" stylesheets="@style.css">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox id="score-baord-ui" alignment="CENTER">
+                     <children>
+                        <Label id="score-label" fx:id="scoreLabel" text="Score : " textFill="WHITE">
+                           <font>
+                              <Font name="Apple Chancery" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label id="score-label-details" fx:id="scoreLabelDetails" text="Adil =&gt; 20 points" textFill="#fffb00">
+                           <font>
+                              <Font name="Apple Chancery" size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="mancheLabel" prefHeight="44.0" prefWidth="272.0" text="Manche : " textFill="WHITE">
+                           <font>
+                              <Font name="Apple Chancery" size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <BorderPane prefHeight="700.0">
+               <top>
+                  <VBox>
+                     <children>
+                        <HBox fx:id="topBox1" alignment="CENTER" BorderPane.alignment="CENTER" />
+                        <HBox fx:id="topBox2" alignment="CENTER" />
+                     </children>
+                  </VBox>
+               </top>
+               <bottom>
+                  <VBox>
+                     <children>
+                        <HBox fx:id="buttomBox1" alignment="CENTER" BorderPane.alignment="CENTER" />
+                        <HBox fx:id="buttomBox2" alignment="CENTER" />
+                     </children>
+                  </VBox>
+               </bottom>
+               <left>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <VBox fx:id="leftBox1" alignment="CENTER_LEFT" BorderPane.alignment="CENTER" />
+                        <VBox fx:id="leftBox2" alignment="CENTER" />
+                        <VBox fx:id="leftBox3" alignment="CENTER" />
+                     </children>
+                  </HBox>
+               </left>
+               <right>
+                  <HBox alignment="CENTER_RIGHT">
+                     <children>
+                        <VBox fx:id="rightBox3" alignment="CENTER" />
+                        <VBox fx:id="rightBox1" alignment="CENTER" BorderPane.alignment="CENTER" />
+                        <VBox fx:id="rightBox2" alignment="CENTER" />
+                     </children>
+                  </HBox>
+               </right>
+               <center>
+                  <StackPane fx:id="centerPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</Pane>

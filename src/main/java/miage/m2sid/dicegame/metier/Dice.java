@@ -1,4 +1,4 @@
-package miage.m2sid.dicegame.miage.m2sid.dicegame.metier;
+package miage.m2sid.dicegame.metier;
 
 import java.util.Observable;
 import java.util.Random;
@@ -38,7 +38,7 @@ public class Dice extends Observable{
         setState(rand.nextInt(6) + 1);
         // On notifie l'observateur
         this.setChanged();
-        this.notifyObservers(id);
+        this.notifyObservers(state);
     }
 
 }

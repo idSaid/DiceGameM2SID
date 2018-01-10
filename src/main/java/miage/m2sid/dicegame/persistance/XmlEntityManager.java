@@ -1,6 +1,6 @@
-package miage.m2sid.dicegame.miage.m2sid.dicegame.persistance;
+package miage.m2sid.dicegame.persistance;
 
-import miage.m2sid.dicegame.miage.m2sid.dicegame.utils.NbrTours;
+import miage.m2sid.dicegame.utils.NbrTours;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

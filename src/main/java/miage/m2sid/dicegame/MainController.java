@@ -1,21 +1,28 @@
 package miage.m2sid.dicegame;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import miage.m2sid.dicegame.control.Game;
+import miage.m2sid.dicegame.persistance.MySqlEntityManager;
+import miage.m2sid.dicegame.utils.ColumnModel;
 
 import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
-public class MainController implements Initializable {
+import static javafx.collections.FXCollections.observableArrayList;
+
+public class MainController implements Initializable, Observer{
     @FXML
     Button btLancerDe;
 
@@ -28,6 +35,20 @@ public class MainController implements Initializable {
     @FXML
     Label score;
 
+    @FXML
+    TableView<ColumnModel> tvHistoriqueLance;
+    @FXML
+    TableColumn<ColumnModel,String> colLance;
+    @FXML
+    TableColumn<ColumnModel,String> colResultat;
+    @FXML
+    TableColumn<ColumnModel,String> colScore;
+
+    private Game game;
+
+    private final ObservableList<ColumnModel> data =
+            observableArrayList();
+
     public void initialize(URL location, ResourceBundle resources) {
         btLancerDe.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
@@ -37,26 +58,62 @@ public class MainController implements Initializable {
                     public void run() {
                         Platform.runLater(new Runnable() {
                             public void run() {
-                                afficherDe(2,6);
+                                afficherDe();
                             }
                         });
                     }
                 }, 3000);
-                btLancerDe.setDisable(true);
             }
         });
+
+        game = new Game(MySqlEntityManager.getInstance());
+        game.addObserver(this);
+        game.getDice1().addObserver(new Observer() {
+            public void update(Observable o, Object arg) {
+                imageDe1.setImage(new Image(getClass().getResourceAsStream("/images/"+arg+".png")));
+                System.out.println("Dé 1 = [" + arg + "]");
+            }
+        });
+        game.getDice2().addObserver(new Observer() {
+            public void update(Observable o, Object arg) {
+                imageDe2.setImage(new Image(getClass().getResourceAsStream("/images/"+arg+".png")));
+                System.out.println("Dé 2 = [" + arg + "]");
+            }
+        });
+
+        initTableView();
     }
 
-    public void lancerDe(){
+    private void lancerDe(){
+        btLancerDe.setDisable(true);
         imageDe1.setImage(new Image(getClass().getResourceAsStream("/images/animation.gif")));
         imageDe2.setImage(new Image(getClass().getResourceAsStream("/images/animation.gif")));
         score.setText(String.valueOf(0));
     }
 
-    public void afficherDe(int valeurDe1, int valeurDe2){
+    private void afficherDe(){
         btLancerDe.setDisable(false);
-        imageDe1.setImage(new Image(getClass().getResourceAsStream("/images/"+valeurDe1+".png")));
-        imageDe2.setImage(new Image(getClass().getResourceAsStream("/images/"+valeurDe2+".png")));
-        score.setText(String.valueOf(valeurDe1+valeurDe2));
+        game.play("Florian");
+    }
+
+    public void update(Observable o, Object arg) {
+        System.out.println("arg = [" + arg + "]");
+        String[] args = ((String)arg).split(":");
+        score.setText(args[1]);
+        data.clear();
+
+        ColumnModel columnModel = new ColumnModel();
+        columnModel.round = args[0];
+        columnModel.resultat = args[1];
+        columnModel.score = args[2];
+
+        data.add(columnModel);
+        tvHistoriqueLance.getItems().addAll(data);
+    }
+
+    private void initTableView(){
+        colLance.setCellValueFactory(new PropertyValueFactory<ColumnModel, String>("round"));
+        colResultat.setCellValueFactory(new PropertyValueFactory<ColumnModel, String>("resultat"));
+        colScore.setCellValueFactory(new PropertyValueFactory<ColumnModel, String>("score"));
     }
 }

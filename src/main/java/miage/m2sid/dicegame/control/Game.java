@@ -1,18 +1,32 @@
-package miage.m2sid.dicegame.miage.m2sid.dicegame.control;
+package miage.m2sid.dicegame.control;
 
-import miage.m2sid.dicegame.miage.m2sid.dicegame.metier.Dice;
-import miage.m2sid.dicegame.miage.m2sid.dicegame.metier.Result;
-import miage.m2sid.dicegame.miage.m2sid.dicegame.persistance.EntityManager;
-import miage.m2sid.dicegame.miage.m2sid.dicegame.utils.NbrTours;
+import miage.m2sid.dicegame.metier.Dice;
+import miage.m2sid.dicegame.metier.Result;
+import miage.m2sid.dicegame.persistance.EntityManager;
+import miage.m2sid.dicegame.persistance.MySqlEntityManager;
+import miage.m2sid.dicegame.utils.NbrTours;
 
 import java.util.Map;
 import java.util.Observable;
 
 public class Game extends Observable {
 
+    /** Holder */
+    private static class GameHolder
+    {
+        private final static Game instance = new Game(MySqlEntityManager.getInstance());
+    }
+
+    /** Point d'accès pour l'instance unique du singleton */
+    public static Game getInstance()
+    {
+        return GameHolder.instance;
+    }
+
     private int id;
     private int round;
     private int score;
+    private String pseudoJoueur;
     private Dice dice1;
     private Dice dice2;
     private EntityManager entityManager;
@@ -113,7 +127,7 @@ public class Game extends Observable {
         }
         // On notifie les observateurs
         this.setChanged();
-        this.notifyObservers(arg);
+        this.notifyObservers(this.round+":"+(dice1.getState()+dice2.getState())+":"+this.score);
         return result;
     }
 
@@ -123,5 +137,13 @@ public class Game extends Observable {
 
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public String getPseudoJoueur() {
+        return pseudoJoueur;
+    }
+
+    public void setPseudoJoueur(String pseudoJoueur) {
+        this.pseudoJoueur = pseudoJoueur;
     }
 }
