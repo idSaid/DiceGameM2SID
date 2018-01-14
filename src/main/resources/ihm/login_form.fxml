@@ -7,10 +7,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="291.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="miage.m2sid.dicegame.LoginController">
    <children>
-      <Button fx:id="btJouer" layoutX="95.0" layoutY="259.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="89.0" text="Jouer" />
+      <Button fx:id="btJouer" layoutX="54.0" layoutY="259.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="89.0" text="Jouer" />
       <Label layoutX="54.0" layoutY="192.0" text="Pseudo" />
-      <TextField fx:id="inputPseudo" layoutX="54.0" layoutY="210.0" prefHeight="28.0" prefWidth="171.0" />
+      <TextField fx:id="inputPseudo" layoutX="54.0" layoutY="210.0" prefHeight="28.0" prefWidth="191.0" />
       <Label layoutX="54.0" layoutY="56.0" text="Règles du jeu :" />
       <Label layoutX="118.0" layoutY="22.0" text="DiceGame" />
+      <Button fx:id="btHighScore" layoutX="156.0" layoutY="259.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="101.0" text="Meilleurs scores" />
    </children>
 </AnchorPane>

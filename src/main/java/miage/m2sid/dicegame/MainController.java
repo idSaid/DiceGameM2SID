@@ -5,7 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -13,10 +16,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import miage.m2sid.dicegame.control.Game;
 import miage.m2sid.dicegame.persistance.MySqlEntityManager;
 import miage.m2sid.dicegame.utils.ColumnModel;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -66,7 +71,7 @@ public class MainController implements Initializable, Observer{
             }
         });
 
-        game = new Game(MySqlEntityManager.getInstance());
+        game = Game.getInstance();
         game.addObserver(this);
         game.getDice1().addObserver(new Observer() {
             public void update(Observable o, Object arg) {
@@ -109,11 +114,37 @@ public class MainController implements Initializable, Observer{
 
         data.add(columnModel);
         tvHistoriqueLance.getItems().addAll(data);
+
+        if(Integer.valueOf(args[0]) == 9){
+            btLancerDe.setText("Terminer");
+            btLancerDe.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                    finishGame();
+                }
+            });
+        }
     }
 
     private void initTableView(){
         colLance.setCellValueFactory(new PropertyValueFactory<ColumnModel, String>("round"));
         colResultat.setCellValueFactory(new PropertyValueFactory<ColumnModel, String>("resultat"));
         colScore.setCellValueFactory(new PropertyValueFactory<ColumnModel, String>("score"));
+    }
+
+    private void finishGame(){
+        Parent root = null;
+        try {
+            Stage primaryStage = (Stage)tvHistoriqueLance.getScene().getWindow();
+
+            root = FXMLLoader.load(getClass().getResource("/ihm/end_game.fxml"));
+            primaryStage.setTitle("DiceGame");
+
+            Scene scene = new Scene(root, 373, 163);
+
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
