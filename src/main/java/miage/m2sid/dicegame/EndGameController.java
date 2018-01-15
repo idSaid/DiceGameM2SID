@@ -12,9 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import miage.m2sid.dicegame.control.Game;
+import miage.m2sid.dicegame.persistance.EntityManager;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class EndGameController implements Initializable {
@@ -26,6 +28,12 @@ public class EndGameController implements Initializable {
 
     @FXML
     private Button btHighScore;
+
+    @FXML
+    private Button btBestPlayer;
+
+    @FXML
+    private Button btBestScore;
 
     public void initialize(URL location, ResourceBundle resources) {
         tvScore.setText(Game.getInstance().getScore()+"");
@@ -39,6 +47,7 @@ public class EndGameController implements Initializable {
         btHighScore.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 System.out.println("btHighScore");
+                chargerBDD();
             }
         });
     }
@@ -57,6 +66,24 @@ public class EndGameController implements Initializable {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void chargerBDD(){
+        EntityManager entityManager = Game.getInstance().getEntityManager();
+        Map<String, String> highscore = entityManager.charger();
+        int score = Game.getInstance().getScore();
+        String playerName = Game.getInstance().getPseudoJoueur();
+        // sauvegarder(score)
+        if (highscore == null || highscore.isEmpty() || Integer.parseInt(highscore.get("score")) <= score) {
+            btBestPlayer.setText(playerName);
+            btHighScore.setText(String.valueOf(score));
+            entityManager.sauvegarder(score, playerName);
+            System.out.println("----------------- GAGNER -------------------");
+        }else{
+            btBestPlayer.setText(highscore.get("pseudo"));
+            btHighScore.setText(highscore.get("score"));
+            System.out.println("----------------- PERDU -------------------");
         }
     }
 }

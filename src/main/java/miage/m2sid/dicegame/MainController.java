@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.*;
 
 import static javafx.collections.FXCollections.observableArrayList;
+import static miage.m2sid.dicegame.utils.NbrTours.NOMBRE_MAX_TOURS;
 
 public class MainController implements Initializable, Observer{
     @FXML
@@ -115,7 +116,7 @@ public class MainController implements Initializable, Observer{
         data.add(columnModel);
         tvHistoriqueLance.getItems().addAll(data);
 
-        if(Integer.valueOf(args[0]) == 9){
+        if(Integer.valueOf(args[0]) == NOMBRE_MAX_TOURS){
             btLancerDe.setText("Terminer");
             btLancerDe.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent e) {
