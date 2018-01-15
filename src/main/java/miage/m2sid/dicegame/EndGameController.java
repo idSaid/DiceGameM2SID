@@ -27,13 +27,10 @@ public class EndGameController implements Initializable {
     private Button btMain;
 
     @FXML
-    private Button btHighScore;
+    private Label tvBestPlayer;
 
     @FXML
-    private Button btBestPlayer;
-
-    @FXML
-    private Button btBestScore;
+    private Label tvBestScore;
 
     public void initialize(URL location, ResourceBundle resources) {
         tvScore.setText(Game.getInstance().getScore()+"");
@@ -44,12 +41,7 @@ public class EndGameController implements Initializable {
             }
         });
 
-        btHighScore.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                System.out.println("btHighScore");
-                chargerBDD();
-            }
-        });
+        chargerBDD();
     }
 
     private void goToMain(){
@@ -76,13 +68,13 @@ public class EndGameController implements Initializable {
         String playerName = Game.getInstance().getPseudoJoueur();
         // sauvegarder(score)
         if (highscore == null || highscore.isEmpty() || Integer.parseInt(highscore.get("score")) <= score) {
-            btBestPlayer.setText(playerName);
-            btHighScore.setText(String.valueOf(score));
+            tvBestPlayer.setText(playerName);
+            tvBestScore.setText(String.valueOf(score));
             entityManager.sauvegarder(score, playerName);
             System.out.println("----------------- GAGNER -------------------");
         }else{
-            btBestPlayer.setText(highscore.get("pseudo"));
-            btHighScore.setText(highscore.get("score"));
+            tvBestPlayer.setText(highscore.get("pseudo"));
+            tvBestScore.setText(highscore.get("score"));
             System.out.println("----------------- PERDU -------------------");
         }
     }

@@ -58,7 +58,7 @@ public class LoginController implements Initializable {
             primaryStage.show();
 
             Game game = Game.getInstance();
-            game.setPseudoJoueur(pseudoJoueur);
+            game.init(pseudoJoueur);
         } catch (IOException e) {
             e.printStackTrace();
         }

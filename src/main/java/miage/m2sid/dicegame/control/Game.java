@@ -103,7 +103,7 @@ public class Game extends Observable {
         }
 
         // si dernier tour on sauvegarde le score si c'est le meilleur score
-        if(this.round== NbrTours.NOMBRE_MAX_TOURS){
+        /*if(this.round== NbrTours.NOMBRE_MAX_TOURS){
             Map<String, String> highscore = entityManager.charger();
             // sauvegarder(score)
             if (highscore == null || highscore.isEmpty()
@@ -119,12 +119,12 @@ public class Game extends Observable {
                 pseudoMeilleurScore = highscore.get("pseudo");
                 System.out.println("----------------- PERDU -------------------");
             }
-        }
+        }*/
         Result result = new Result(dice1, dice2, score);
-        if (NbrTours.NOMBRE_MAX_TOURS == round) {
+        /*if (NbrTours.NOMBRE_MAX_TOURS == round) {
             result.setMeilleurScore(meilleurScore);
             result.setPseudoMeilleurScore(pseudoMeilleurScore);
-        }
+        }*/
         // On notifie les observateurs
         this.setChanged();
         this.notifyObservers(this.round+":"+(dice1.getState()+dice2.getState())+":"+this.score);
@@ -144,6 +144,12 @@ public class Game extends Observable {
     }
 
     public void setPseudoJoueur(String pseudoJoueur) {
+        this.pseudoJoueur = pseudoJoueur;
+    }
+
+    public void init(String pseudoJoueur){
+        this.round = 0;
+        this.score = 0;
         this.pseudoJoueur = pseudoJoueur;
     }
 }

@@ -140,7 +140,7 @@ public class MainController implements Initializable, Observer{
             root = FXMLLoader.load(getClass().getResource("/ihm/end_game.fxml"));
             primaryStage.setTitle("DiceGame");
 
-            Scene scene = new Scene(root, 373, 163);
+            Scene scene = new Scene(root, 373, 342);
 
             primaryStage.setScene(scene);
             primaryStage.show();
